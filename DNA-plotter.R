@@ -178,7 +178,6 @@ get_consensus <- function(x,ref){
         spaces_count <- spaces_count  + 1
       }else{
         print(letter)
-        print('Dammit')
       }
       count <- count + 1
     }
@@ -236,7 +235,6 @@ get_simple_consensus <- function(x,ref){
         spaces_count <- spaces_count  + 1
       }else{
         print(letter)
-        print('Dammit2')
       }
       count <- count + 1
     }
@@ -297,9 +295,6 @@ compare_seq_to_con <- function(data,con){
   data$consensus_match <- apply(data,1,function(row){
     base <- row[7]
     pos <- as.numeric(str_trim(row[8]))
-    #print(i)
-#    print(pos)
-#    print(length(con_vec))
     if(i == 10532 || i == 10343){
       one =1
       #stop here
@@ -353,7 +348,11 @@ p <- ggplot(data = its1_final_info,aes(x=count,y=sample,color=hybrid),fill=hybri
   theme(legend.title=element_blank()) + 
   geom_vline(xintercept=its1_span, linetype="solid", color = "red") +
   geom_vline(xintercept=(its1_span+s58_span), linetype="solid", color = "red") 
-ggsave('ITS-Hybrid.png',width = 12, height = 5, units = c("in"))
+ggsave('ITS-Hybrid.png',width = 12, height = 7.5, units = c("in"))
 
 
 #sample, number, base, variance, A, T, C, G
+
+variance_info <- its1_info[[2]][its1_info[[2]]$variance != 0,]
+variance_info
+write_csv(variance_info,'All-Variance.csv')
